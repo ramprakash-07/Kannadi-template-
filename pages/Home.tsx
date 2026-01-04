@@ -29,6 +29,20 @@ const Home: React.FC = () => {
     return () => clearInterval(timer);
   }, [weddingDate]);
 
+  // Function to handle Google Calendar Export
+  const handleSaveTheDate = () => {
+    const title = encodeURIComponent("Sara & Arjun's Wedding");
+    const details = encodeURIComponent("Together with our families, we joyfully invite you to join us as we begin our new life together.");
+    const location = encodeURIComponent("Varadha Raja Cinemas, Kanchipuram, Tamil Nadu 631501");
+    // Format: YYYYMMDDTHHMMSSZ
+    const startDate = "20260123T160000";
+    const endDate = "20260123T230000";
+    
+    const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
+    
+    window.open(googleCalendarUrl, '_blank');
+  };
+
   // Automated intense heart shattering effect when hovered
   useEffect(() => {
     let interval: number;
@@ -94,8 +108,8 @@ const Home: React.FC = () => {
               <span className="h-px w-8 bg-primary/60"></span>
             </div>
             <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tighter text-slate-900 leading-[0.9]">
-              Sarah <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900">&amp; James</span>
+              Sara <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900">&amp; Arjun</span>
             </h1>
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2 sm:gap-6 mt-2 text-slate-600">
               <div className="flex items-center gap-2">
@@ -183,18 +197,21 @@ const Home: React.FC = () => {
             </div>
 
             {/* Save the Date Card */}
-            <div className={`absolute bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 bg-white/95 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-2xl border border-white/40 transition-all duration-700 ${isHovered ? 'scale-105 translate-x-2 -translate-y-1' : ''}`}>
+            <button 
+              onClick={handleSaveTheDate}
+              className={`absolute bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 bg-white/95 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-2xl border border-white/40 transition-all duration-700 cursor-none hover:bg-white ${isHovered ? 'scale-105 translate-x-2 -translate-y-1' : ''}`}
+            >
               <div className="flex items-center gap-3 sm:gap-4">
                 <div className={`h-10 w-10 sm:h-12 sm:w-12 rounded-full transition-colors duration-700 flex items-center justify-center 
                   ${isHovered ? 'bg-primary text-white' : 'bg-primary/10 text-primary'}`}>
-                  <span className="material-symbols-outlined text-xl sm:text-2xl">favorite</span>
+                  <span className="material-symbols-outlined text-xl sm:text-2xl">event_available</span>
                 </div>
-                <div>
+                <div className="text-left">
                   <p className="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-widest">Save the Date</p>
                   <p className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">23.01.2026</p>
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         </div>
       </div>

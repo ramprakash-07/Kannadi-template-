@@ -21,7 +21,7 @@ const RSVP: React.FC = () => {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
-        contents: "Write a short, heartwarming 2-sentence wedding wish from a guest named " + (formData.fullName || 'a friend') + " to Sarah and James."
+        contents: "Write a short, heartwarming 2-sentence wedding wish from a guest named " + (formData.fullName || 'a friend') + " to Sara and Arjun."
       });
       if (response.text) {
         setFormData(prev => ({ ...prev, message: response.text || '' }));

@@ -16,7 +16,7 @@ export const TIMELINE: TimelineEvent[] = [
   {
     date: 'June 15, 2018',
     title: 'The First Meeting',
-    description: 'It all started at "The Daily Grind" coffee shop. Jane ordered a vanilla latte, John ordered a black coffee, and they accidentally grabbed each other\'s cups. One awkward apology and three hours of conversation later, neither wanted to leave.',
+    description: 'It all started at "The Daily Grind" coffee shop. Sara ordered a vanilla latte, Arjun ordered a black coffee, and they accidentally grabbed each other\'s cups. One awkward apology and three hours of conversation later, neither wanted to leave.',
     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDUMu_SZXYAjfKr9l7ihEX8ip1-d9KoT7VuIA7quIbCAAP4OYUfK6gRIVD-8AejyEV-yhYgzCaqz98MhOYnaWH2spgPtmEKreKq1BZN0L2ljlQQ5RDqK40PdFERA2vFAiFZ87a0FuATXBZNpit-C_YEQQPdyzYc7Mh0k1z8qEz62XAXhSTccktQsLwyURp3SKOB109iq35YFbnDna7ISA1dTDhpkhreNz5-MBGzNqLyvqAevUN2o_JS4-wIiLGP5ce5Bqbi8NVRgjJz',
     icon: 'local_cafe'
   },
@@ -30,7 +30,7 @@ export const TIMELINE: TimelineEvent[] = [
   {
     date: 'August 2020',
     title: 'Our First Home',
-    description: 'We signed the lease, packed way too many boxes, and officially moved in together. We learned that John owns too many guitars and Jane owns too many plants, but we made it work perfectly.',
+    description: 'We signed the lease, packed way too many boxes, and officially moved in together. We learned that Arjun owns too many guitars and Sara owns too many plants, but we made it work perfectly.',
     imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDl_c1TmZB5VPofx0Qtx43dphBdDi76CuqRJgHyNeD-jRUDgeQHq4Mbrm0yS5LcYAfhg04lGt-zgcwrkWeZeYU7PGOyQDf_27q81MwnPj9sDbvPjM9L860CgJZgHQ0YxrsQF8uZDOl4BFt2strCA0vOV4JqMQ1kbrroIA4I-lY1vzKt6Po5qNyQE_sryi6Y0i-BUht_HrwW2UItz1zBpZ8sen6WhyW-7gEoe14OzlfqZePJnajpZiR91-2mYQBOuR8dYHyY8weURMr',
     icon: 'home'
   }

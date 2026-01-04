@@ -6,6 +6,8 @@ import OurStory from './pages/OurStory';
 import Details from './pages/Details';
 import RSVP from './pages/RSVP';
 
+declare const gsap: any;
+
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hearts, setHearts] = useState<{ id: number; x: number; y: number; size: number }[]>([]);
@@ -15,11 +17,9 @@ const CustomCursor = () => {
     const onMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       
-      // Add a heart if we've moved enough
       const dist = Math.hypot(e.clientX - lastPos.current.x, e.clientY - lastPos.current.y);
       if (dist > 30) {
         const id = Date.now() + Math.random();
-        // Random size between 10px and 24px
         const size = 10 + Math.random() * 14;
         setHearts((prev) => [...prev.slice(-20), { id, x: e.clientX, y: e.clientY, size }]);
         lastPos.current = { x: e.clientX, y: e.clientY };
@@ -50,6 +50,75 @@ const CustomCursor = () => {
   );
 };
 
+const CinematicIntro = ({ onComplete }: { onComplete: () => void }) => {
+  useEffect(() => {
+    const tl = gsap.timeline({
+      onComplete: onComplete
+    });
+
+    // Reset initial state
+    gsap.set(".text-5", { scale: 0.1, opacity: 0, filter: "blur(20px)" });
+
+    tl.to(".text-1", { opacity: 1, duration: 1.0, ease: "power2.out" })
+      .to(".text-1", { opacity: 0, duration: 1.0, ease: "power2.in" }, "+=1.0")
+      
+      .to(".text-2", { opacity: 1, duration: 0.75, ease: "power2.out" })
+      .to(".text-2", { opacity: 0, duration: 0.75, ease: "power2.in" }, "+=0.75")
+      
+      .to(".text-3", { opacity: 1, duration: 0.75, ease: "power2.out" })
+      .to(".text-3", { opacity: 0, duration: 0.75, ease: "power2.in" }, "+=0.75")
+      
+      .to(".text-4", { opacity: 1, duration: 0.75, ease: "power2.out" })
+      .to(".text-4", { opacity: 0, duration: 0.75, ease: "power2.in" }, "+=0.75")
+      
+      // OUR WEDDING - Zoom Sequence
+      .to(".text-5", { 
+        opacity: 1, 
+        scale: 1, 
+        filter: "blur(0px)", 
+        duration: 2.0, 
+        ease: "expo.out",
+        onStart: () => {
+          gsap.to(".text-5", {
+            backgroundPosition: "200% center",
+            duration: 3,
+            repeat: -1,
+            ease: "none"
+          });
+        }
+      })
+      .to(".text-5", { 
+        scale: 5, 
+        opacity: 0, 
+        filter: "blur(30px)", 
+        duration: 1.5, 
+        ease: "power2.in" 
+      }, "+=0.5")
+      
+      .to(".intro-container", { opacity: 0, duration: 1.2, ease: "power2.inOut" }, "-=0.5");
+
+    return () => {
+      tl.kill();
+    };
+  }, [onComplete]);
+
+  return (
+    <div className="intro-container">
+      <div className="intro-text text-1 text-2xl md:text-3xl font-serif-creative italic">A Great News</div>
+      <div className="intro-text text-2 text-6xl md:text-8xl font-serif-creative font-black">Sara</div>
+      <div className="intro-text text-3 text-6xl md:text-8xl font-serif-creative font-black">Arjun</div>
+      <div className="intro-text text-4 text-2xl md:text-3xl font-serif-creative font-light">Invite You For</div>
+      <div className="intro-text text-5 text-4xl md:text-7xl font-serif-creative font-black shimmer-text">
+        Our Wedding
+      </div>
+      
+      <div className="absolute bottom-10 left-0 w-full text-center text-white/20 text-[10px] md:text-xs tracking-[0.5em] uppercase font-serif-creative">
+        January 23rd, 2026 • Varadha Raja Cinemas
+      </div>
+    </div>
+  );
+};
+
 const Navbar = () => {
   const { pathname } = useLocation();
   
@@ -59,7 +128,7 @@ const Navbar = () => {
         <div className="flex h-20 items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <span className="material-symbols-outlined text-primary text-3xl">favorite</span>
-            <h2 className="text-xl font-bold tracking-tight text-slate-900">Sarah & James</h2>
+            <h2 className="text-xl font-bold tracking-tight text-slate-900">Sara & Arjun</h2>
           </Link>
           <nav className="hidden md:flex items-center gap-10">
             {[
@@ -98,7 +167,7 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto px-4 text-center">
       <div className="flex items-center justify-center gap-2 mb-6">
         <span className="material-symbols-outlined text-primary">favorite</span>
-        <span className="text-xl font-bold">Sarah & James</span>
+        <span className="text-xl font-bold">Sara & Arjun</span>
       </div>
       <div className="flex flex-wrap justify-center gap-8 text-sm font-medium text-slate-500 mb-8">
         <Link to="/story" className="hover:text-primary">Our Story</Link>
@@ -106,26 +175,34 @@ const Footer = () => (
         <Link to="/rsvp" className="hover:text-primary">RSVP</Link>
       </div>
       <p className="text-slate-400 text-sm">January 23, 2026 • Varadha Raja Cinemas, Kanchipuram</p>
-      <p className="text-slate-300 text-xs mt-2">© 2026 Sarah & James Wedding. All rights reserved.</p>
+      <p className="text-slate-300 text-xs mt-2">© 2026 Sara & Arjun Wedding. All rights reserved.</p>
     </div>
   </footer>
 );
 
 const App: React.FC = () => {
+  const [showIntro, setShowIntro] = useState(true);
+
   return (
     <Router>
       <div className="min-h-screen flex flex-col font-display selection:bg-primary/20 selection:text-primary">
-        <CustomCursor />
-        <Navbar />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/story" element={<OurStory />} />
-            <Route path="/details" element={<Details />} />
-            <Route path="/rsvp" element={<RSVP />} />
-          </Routes>
-        </main>
-        <Footer />
+        {showIntro && <CinematicIntro onComplete={() => setShowIntro(false)} />}
+        
+        {!showIntro && (
+          <div className="animate-fade-in duration-1000">
+            <CustomCursor />
+            <Navbar />
+            <main className="flex-grow">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/story" element={<OurStory />} />
+                <Route path="/details" element={<Details />} />
+                <Route path="/rsvp" element={<RSVP />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        )}
       </div>
     </Router>
   );
