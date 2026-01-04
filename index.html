@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah & James Wedding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e8306e",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211116",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { 
+          font-family: 'Plus Jakarta Sans', sans-serif; 
+          cursor: none; /* Hide default cursor */
+        }
+        
+        /* Ensure interactive elements also hide cursor */
+        a, button, input, select, textarea, label { cursor: none !important; }
+
+        .timeline-line {
+            background: linear-gradient(180deg, rgba(232,48,110,0) 0%, rgba(232,48,110,0.3) 15%, rgba(232,48,110,0.3) 85%, rgba(232,48,110,0) 100%);
+        }
+
+        /* Custom Cursor */
+        .cursor-dot {
+          width: 14px;
+          height: 14px;
+          background-color: #e8306e; /* Dark pink */
+          border-radius: 50%;
+          position: fixed;
+          pointer-events: none;
+          z-index: 10000;
+          transform: translate(-50%, -50%);
+          box-shadow: 0 0 10px rgba(232, 48, 110, 0.4);
+        }
+
+        /* Heart Trail Particle */
+        .heart-trail {
+          position: fixed;
+          pointer-events: none;
+          z-index: 9999;
+          color: #e8306e;
+          font-variation-settings: 'FILL' 1;
+          animation: fadeAndRise 1s ease-out forwards;
+        }
+
+        @keyframes fadeAndRise {
+          0% {
+            opacity: 0.8;
+            transform: translate(-50%, -50%) scale(0.5);
+          }
+          100% {
+            opacity: 0;
+            transform: translate(-50%, -120%) scale(1.2) rotate(20deg);
+          }
+        }
+
+        /* Celebrative Heart (Image Hover) */
+        .celebrative-heart {
+          position: absolute;
+          pointer-events: none;
+          z-index: 50;
+          color: #e8306e;
+          font-variation-settings: 'FILL' 1;
+          animation: shatter 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+
+        @keyframes shatter {
+          0% {
+            opacity: 1;
+            transform: translate(0, 0) scale(0.2);
+          }
+          100% {
+            opacity: 0;
+            transform: translate(var(--tw-x), var(--tw-y)) scale(1.5) rotate(var(--tw-rotate));
+          }
+        }
+
+        /* Magic Sparkle Effect */
+        .magic-sparkle {
+          position: absolute;
+          pointer-events: none;
+          color: white;
+          font-variation-settings: 'FILL' 1;
+          z-index: 40;
+          animation: twinkle 1s ease-in-out forwards;
+        }
+
+        @keyframes twinkle {
+          0% { transform: scale(0) rotate(0deg); opacity: 0; }
+          50% { opacity: 1; }
+          100% { transform: scale(1.5) rotate(180deg); opacity: 0; }
+        }
+
+        /* Image Glow Pulse - Reduced spread to prevent feeling too 'expanded' */
+        @keyframes glowPulse {
+          0% { box-shadow: 0 0 15px rgba(232, 48, 110, 0.15); }
+          50% { box-shadow: 0 0 30px rgba(232, 48, 110, 0.35); }
+          100% { box-shadow: 0 0 15px rgba(232, 48, 110, 0.15); }
+        }
+        .animate-glow {
+          animation: glowPulse 2s infinite ease-in-out;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+</head>
+<body class="bg-background-light text-slate-900 transition-colors duration-300">
+    <div id="root"></div>
+</body>
+</html>
